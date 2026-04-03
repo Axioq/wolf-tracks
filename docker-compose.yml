@@ -1,0 +1,21 @@
+services:
+  # Main pipeline services - runs extract + load + dbt
+  pipeline:
+    build: .
+    env_file: .env
+    volumes:
+      # Mounting code so it can be edited locally and run in the container
+      - ./extract:/app/extract
+      - ./load:/app/load
+      - ./scripts:/app/scripts
+      - ./transform:/app/transform
+      - ./tests:/app/tests
+      # Mounting data directory so DuckDB presists between runs
+      - ./data:/app/data
+    # Overriding the default CMD to keep the container alive for now
+    # This lets me run commands interactively during development
+    command: ["sleep", "infinity"]
+
+    # Allows the container to reach Tautulli on local machine
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
