@@ -1,0 +1,6 @@
+name: wolf_tracks
+version: '1.0.0'
+profile: wolf_tracks
+
+model-paths: ["models"]
+clean-targets: ["target", "dbt_packages", "logs"]

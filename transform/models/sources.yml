@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+ - name: raw
+   schema: raw
+   tables:
+     - name: raw_play_history
+       description: Raw play history data from Tautulli API

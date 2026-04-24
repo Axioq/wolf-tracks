@@ -1,0 +1,7 @@
+wolf_tracks:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: /app/data/wolf_tracks.duckdb
+      schema: analytics
