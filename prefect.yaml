@@ -1,0 +1,35 @@
+# Generic metadata about this project
+name: app
+prefect-version: 3.7.0
+
+# build section allows you to manage and build docker images
+build: null
+
+# push section allows you to manage if and how this project
+# is uploaded to remote locations
+push: null
+
+# pull section allows you to provide instructions for cloning
+# this project in remote locations
+pull:
+- prefect.deployments.steps.set_working_directory:
+    directory: /app
+
+# the deployments section allows you to provide configuration
+# for deploying flows
+deployments:
+- name: wolf-tracks-daily
+  version: null
+  tags: []
+  concurrency_limit: null
+  description: null
+  entrypoint: scripts/run_pipeline.py:pipeline
+  parameters: {}
+  work_pool:
+    name: wolf-tracks-pool
+    work_queue_name: null
+    job_variables: {}
+  schedules:
+  - cron: 0 16 * * *
+    timezone: null
+    day_or: true
