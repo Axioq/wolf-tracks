@@ -31,5 +31,6 @@ deployments:
     job_variables: {}
   schedules:
   - cron: 0 16 * * *
-    timezone: null
+    timezone: UTC
     day_or: true
+    active: true
