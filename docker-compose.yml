@@ -10,10 +10,12 @@ services:
       - PREFECT_UI_API_URL=http://localhost:4200/api
 
   prefect-worker:
-    image: prefecthq/prefect:3-latest
-    command: prefect worker --start --pool wolf-tracks-pool --type process
+    build: .
+    restart: unless-stopped
+    command: prefect worker start --pool wolf-tracks-pool --type process
     environment:
       - PREFECT_API_URL=http://prefect-server:4200/api
+    env_file: .env
     depends_on:
       - prefect-server
     volumes:
@@ -22,7 +24,8 @@ services:
       - ./scripts:/app/scripts
       - ./transform:/app/transform
       - ./data:/app/data
-    working_dir: /app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   # Main pipeline services - runs extract + load + dbt
   pipeline:
     build: .
